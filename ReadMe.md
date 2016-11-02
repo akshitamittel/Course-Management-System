@@ -1,13 +1,13 @@
 #DBMS Project: College Management System in Golang.
 
 ##Authors:
-Akshita Mittel (cs13b1040@iith.ac.in)
-Keyur Joshi (cs13b1011@iith.ac.in)
-CH Sreekar Reddy (cs13b1008@iith.ac.in)
-Arjun V Anand (cs13b1041@iith.ac.in)
+* Akshita Mittel (cs13b1040@iith.ac.in)
+* Keyur Joshi (cs13b1011@iith.ac.in)
+* CH Sreekar Reddy (cs13b1008@iith.ac.in)
+* Arjun V Anand (cs13b1041@iith.ac.in)
 
 ##E-R digram of the Database system
-![](https://github.com/akshitamittel/College-Management-System/blob/master/ER-diag.png)
+![](https://github.com/akshitamittel/College-Management-System/blob/master/diagram.png)
 
 ##Instructions to run the Database
 1. You will need mysql and go-sql-driver. 

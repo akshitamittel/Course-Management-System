@@ -7,7 +7,7 @@
 * Arjun V Anand (cs13b1041@iith.ac.in)
 
 ##E-R digram of the Database system
-![](https://github.com/akshitamittel/College-Management-System/blob/master/diagram.png)
+![](https://github.com/akshitamittel/Course-Management-System/blob/master/diagram.png)
 
 ##Instructions to run the Database
 1. You will need mysql and go-sql-driver. 

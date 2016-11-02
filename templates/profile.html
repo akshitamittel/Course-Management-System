@@ -1,0 +1,71 @@
+<html>
+
+<head>
+	<title>Profile</title>
+	<link rel="stylesheet" href="/css/home.css">
+</head>
+
+<body>
+
+	<div id= "options">
+		<form action="/logout/" method="GET">
+			<input type="submit" value="Log Out">
+		</form>
+		<script>
+			if({{.PL}} == 2){ 
+				document.write("<form action=\"/deanhome/\" method=\"GET\"><input type=\"submit\" value=\"Home\"></form>");
+			} else { 
+				document.write("<form action=\"/home/\" method=\"GET\"><input type=\"submit\" value=\"Home\"></form>");
+			}
+		</script>
+	</div>
+
+	<div id = "head1">
+		<h1 style="text-align:center">{{.Name}} - Profile</h1>
+	</div>
+
+	<div id = "nav">
+	</div>
+	<hr>
+	<div id = "section">
+		<h3> PERSONAL INFORMATION </h3>
+		Name: {{.Name}} <br>
+		Email: {{.Email}} <br>
+		<script>
+			if({{.RollNo}}==""){
+				document.write("");
+			} else {
+				document.write("Roll Number: "+{{.RollNo}}+"<br>");
+			}
+		</script>
+		<hr>
+		<h3> ROLES </h3>
+
+		<script>
+			if({{.PL}} == 2){
+				document.write({{.Role}} + "<br>")
+			}
+			else{
+
+				function roles(i){
+					if(i==1){
+						return "Teacher";
+					} else if (i == 2) {
+						return "Teaching assistant";
+					}
+					else{
+						return "Student";
+					}
+				}
+				var role = JSON.parse({{.Role}});
+				var i;
+				for(i = 0; i < role.length; i++){
+					document.write(roles(role[i]["Role"])+ " in "+role[i]["courseID"]+": "+role[i]["courseName"]+"<br>");
+				}
+			}
+		</script>
+	<hr>
+	</div>
+</body>
+
+</html>

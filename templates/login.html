@@ -1,0 +1,43 @@
+<html>
+
+<head>
+
+<title>Login</title>
+
+</head>
+
+<body>
+
+<h1 style="text-align:center">DBMS Project - Course Management System</h1>
+
+<hr>
+
+{{.RegComp}}
+
+<h2>Login</h2>
+
+<form action="/login-submit/" method="POST">
+	Email Address<br>
+	<input type="text" name="email" required><span style="color: red">{{.Emailerr}}</span><br>
+	Password<br>
+	<input type="password" name="passwd" required><span style="color: red">{{.Passwderr}}</span><br>
+	<input type="submit" value="Login">
+</form>
+
+<form action="/register/" method="GET">
+	<input type="submit" value="Don't have an account? Register!">
+</form>
+
+<hr>
+
+Authors:
+<ul>
+	<li> Keyur (cs13b1014)
+	<li> Arjun (cs13b1041)
+	<li> Sreekar (cs13b1008)
+	<li> Akshita (cs13b1040)
+</ul>
+
+</body>
+
+</html>

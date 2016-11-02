@@ -1,0 +1,59 @@
+<html>
+
+<head>
+	<title>Roles Page</title>
+	<link rel="stylesheet" href="/css/home.css">
+</head>
+
+<body>
+
+	<div id= "options">
+		<form action="/logout/" method="GET">
+			<input type="submit" value="Log Out">
+		</form>
+		<form action="/home/" method="GET">
+			<input type="submit" value="Home">
+		</form>
+
+	</div>
+
+	<div id = "head1">
+		<h1 style="text-align:center">{{.CourseCode}}: {{.CourseName}} - Assignment/Announcement Page</h1>
+	</div>
+
+	<hr>
+	<div id="section">
+		<button onclick="myFunction()">Create Assignment</button>
+		<button onclick="myFunction1()">Create Announcement</button>
+
+		<p id="demo"></p>
+
+		<script>
+		function myFunction() {
+			var htmlString = "<form action=\"/registerAssn/\" method=\"POST\">"+
+			"<INPUT TYPE=\"hidden\" NAME=\"courseID\" VALUE="+{{.CourseID}}+">"+
+			"<INPUT TYPE=\"hidden\" NAME=\"createType\" VALUE=1>"+
+			"Title: <INPUT TYPE=\"text\" NAME=\"title\"><br>"+
+			"Submission Date(yyyy-mm-dd):<INPUT TYPE=\"text\" NAME=\"date1\"><br> "+
+			"Submission Time(hh:mm): <INPUT TYPE=\"text\" NAME=\"time1\"><br><br>"+
+			"Max Submission Date(yyyy-mm-dd):<INPUT TYPE=\"text\" NAME=\"date2\"><br> "+
+			"Submission Time(hh:mm): <INPUT TYPE=\"text\" NAME=\"time2\"><br><br>"+
+			"Maximum Marks:<INPUT TYPE=\"text\" NAME=\"marks\"><br>"+
+			"<input type=\"submit\" value=\"Create\"></form>";
+  		  	document.getElementById("demo").innerHTML = htmlString;
+		}
+		function myFunction1() {
+    		var htmlString = "<form action=\"/registerAssn/\" method=\"POST\">"+
+			"<INPUT TYPE=\"hidden\" NAME=\"courseID\" VALUE="+{{.CourseID}}+">"+
+			"<INPUT TYPE=\"hidden\" NAME=\"createType\" VALUE=2>"+
+			"Title: <INPUT TYPE=\"text\" NAME=\"title\"><br>"+
+			"<input type=\"submit\" value=\"Create\"></form>";
+  		  	document.getElementById("demo").innerHTML = htmlString;
+		}
+		</script>
+		
+	</div>
+	
+</body>
+
+</html>

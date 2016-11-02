@@ -1,0 +1,133 @@
+<html>
+
+<head>
+	<title>Course Page</title>
+	<link rel="stylesheet" href="/css/home.css">
+</head>
+
+<body>
+
+	<div id= "options">
+		<form action="/logout/" method="GET">
+			<input type="submit" value="Log Out">
+		</form>
+		<form action="/home/" method="GET">
+			<input type="submit" value="Home">
+		</form>
+		<script>
+			var i = {{.Role}};
+			if(i == 1 || i == 2){
+				if(i == 1){
+				document.write("<h3><a href=\"/chgroles/"+{{.CourseID}}+"\">"+"Appoint Roles"+"</a></h3>");
+				}
+				document.write("<h3><a href=\"/assnCreate/"+{{.CourseID}}+"\">"+"Create Assignment/Announcement"+"</a></h3>");
+				document.write("<h3><a href=\"/students/"+{{.CourseID}}+"\">"+"Classmates"+"</a></h3>");
+
+			}
+			else{
+				document.write("");
+			}
+		</script>
+
+	</div>
+
+	<hr>
+	<div id = "head1">
+		<h1 style="text-align:center">{{.CourseCode}}: {{.CourseName}}</h1>
+	</div>
+	<hr>
+
+
+	<div id = "nav">
+	</div>
+
+	<div id = "section">
+		<script>
+			var instr = JSON.parse({{.Instructors}});
+			document.write("<h3>Instructors:</h3>");
+			var i;
+			for(i=0; i < instr["teachers"].length; i++){
+				if(i != 0){
+					document.write(", ");
+				}
+				document.write(instr["teachers"][i]);
+			}
+			document.write("<br>");
+			if(instr["tas"].length != 0){
+				document.write("<h3>Teaching assistants:</h3>");
+				for(i=0; i < instr["tas"].length; i++){
+					if(i != 0){
+						document.write(", ");
+					}
+					document.write(instr["tas"][i]);
+				}
+				document.write("<br>");
+			}
+		</script>
+	</div>
+	<hr>
+
+	<div>
+		<script>
+			var role = {{.Role}};
+			var assns = JSON.parse({{.Assignments}});
+			var i;
+			if(role == 1||role == 2){
+				document.write("<ul>");
+				for(i=0; i<assns.length; i++){
+					var type;
+					if(assns[i]["due"] != ""){
+						type = "Assignment: ";
+					} else {
+						type = "Announcement: ";
+					}
+					document.write("<li><h4>"+type+" <a href=\"/assn/"+assns[i]["id"]+"\">"+assns[i]["title"]+"</a></h3> ");
+					if(assns[i]["due"] != ""){
+						document.write("Completed: "+assns[i]["total"]);
+					}
+					document.write("</li>");
+				}
+				document.write("</ul");
+			}else{
+
+				document.write("<ul>");
+				for(i=0; i<assns.length; i++){
+					var type;
+					if(assns[i]["due"] != ""){
+						type = "Assignment: ";
+					} else {
+						type = "Announcement: ";
+					}
+					document.write("<li><h4>"+type+" <a href=\"/assn/"+assns[i]["id"]+"\">"+assns[i]["title"]+"</a></h3> ");
+					if(assns[i]["done"] != "none"){
+						document.write("<b>"+assns[i]["done"]+"</b>");
+						if(assns[i]["done"] != "Done"){
+							var dat = assns[i]["due"].replace(" ","T");
+							dat = new Date(dat);
+							var now = new Date();
+
+							if(now<dat){
+								document.write(": Due ");
+								document.write(dat);
+							} else {
+								document.write(": LATE!");
+								var maxDat = assns[i]["maxDue"].replace(" ","T");
+								maxDat = new Date(maxDat);
+								if(assns[i]["maxDue"] != "" && maxDat < now){
+									document.write(" Maximum Submission Date ");
+									document.write(maxDat);
+								}
+							}
+						}
+					}
+					document.write("</li>");
+					// document.write("<h5>")
+				}
+				document.write("</ul");
+			}
+
+		</script>
+	</div>
+	<hr>	
+</body>
+</html>

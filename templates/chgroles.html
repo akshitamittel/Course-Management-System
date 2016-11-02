@@ -1,0 +1,42 @@
+<html>
+
+<head>
+	<title>Roles Page</title>
+	<link rel="stylesheet" href="/css/home.css">
+</head>
+
+<body>
+
+	<div id= "options">
+		<form action="/logout/" method="GET">
+			<input type="submit" value="Log Out">
+		</form>
+		<form action="/home/" method="GET">
+			<input type="submit" value="Home">
+		</form>
+
+	</div>
+
+	<div id = "head1">
+		<h1 style="text-align:center">{{.CourseCode}}: {{.CourseName}} - Roles Page</h1>
+	</div>
+
+	<hr>
+	<div id="section">
+		<script>
+			var options = "<option value=0>None</option><option value=1>Teacher</option><option value=2>Teaching Assistant</option><option value=3>Student</option>";
+			document.write("<form action=\"/roleAssn/\" method=\"POST\">");
+			document.write("<INPUT TYPE=\"hidden\" NAME=\"courseID\" VALUE="+{{.CourseID}}+">");
+			document.write("<h3>Insert email id and role:</h3>");
+			document.write("Email:");
+			document.write("<INPUT TYPE=\"text\" NAME=\"email\">");
+			document.write("Role:");
+			document.write("<select NAME=\"role\">"+options+"</select>");
+			document.write("</table>");
+			document.write("<input type=\"submit\" value=\"Assign\"></form>");
+		</script>
+	</div>
+	
+</body>
+
+</html>

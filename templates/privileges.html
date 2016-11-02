@@ -1,0 +1,52 @@
+<html>
+
+<head>
+
+<title>Privelege assign</title>
+
+</head>
+
+<body>
+
+	<div id= "options">
+		<form action="/logout/" method="GET">
+			<input type="submit" value="Log Out">
+		</form>
+		<form action="/home/" method="GET">
+			<input type="submit" value="Home">
+		</form>
+	</div>
+	<script>
+		var i = {{.Response}};
+
+		if(i != 0){
+			document.write("Name: "+{{.Name}}+"<br>");
+			document.write("EmailId: " + {{.Email}}+"<br>");
+			document. write("Roll Number: " +{{.Rollno}}+"<br><br>");
+			if({{.PrivilegeLevel}} == 0){
+				document.write("Current privilege level: Student <br>");
+			}
+			if({{.PrivilegeLevel}} == 1){
+				document.write("Current privilege level: Instructor <br>");
+			}
+			if({{.PrivilegeLevel}} == 2){
+				document.write("Current privilege level: Dean <br>");
+			}
+			if({{.AccEmail}}=={{.Email}}){
+				document.write("You are Dean. Cannot depromote yourself! Sorry mate");
+			}else{
+			
+				document.write("Change account privilege to");
+				document.write("<form action=\"/privilegeEscalator/\" method=\"POST\">");
+				document.write("<INPUT TYPE=\"hidden\" NAME=\"emailID\" VALUE="+{{.Email}}+">");
+				document.write("<select NAME=\"Level\"> <option value=\"2\">Dean</option><option value=\"1\">Instructor</option><option value=\"0\">Student</option></select><input type=\"submit\" value=\"Submit\"></form>");
+			}
+
+		}else{
+			document.write("The email id does not belong to an account.");
+		}
+	</script>
+
+</body>
+
+</html>

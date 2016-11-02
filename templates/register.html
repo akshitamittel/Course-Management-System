@@ -1,0 +1,54 @@
+<html>
+
+<head>
+
+<title>Register</title>
+
+<script>
+function checkForm() {
+	var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if ( !re.test( document.forms["regform"]["email"].value ) ) {
+    	alert("Bad email address");
+    	return false;
+    }
+    if ( document.forms["regform"]["passwd"].value != document.forms["regform"]["passwd2"].value ) {
+        alert("Passwords do not match");
+        return false;
+    }
+    return true;
+}
+</script>
+
+</head>
+
+<body>
+
+<h1 style="text-align:center">Register</h1>
+
+<hr>
+
+<form action="/login/" method="GET">
+	<input type="submit" value="Already have an account? Login!">
+</form>
+
+<h2>Enter your details to get an account</h2>
+
+<form name="regform" action="/register-submit/" onsubmit="return checkForm()" method="POST">
+	First Name<br>
+	<input type="text" name="firstname" required><br>
+	Last Name<br>
+	<input type="text" name="lastname" required><br>
+	Roll No. (Optional)<br>
+	<input type="text" name="rollno"><br>
+	Email Address<br>
+	<input type="text" name="email" required><span style="color: red">{{.Emailerr}}</span><br>
+	Password<br>
+	<input type="password" name="passwd" required><br>
+	Re-enter Password<br>
+	<input type="password" name="passwd2" required><br>
+	<input type="submit" value="Complete Registration">
+</form>
+
+</body>
+
+</html>

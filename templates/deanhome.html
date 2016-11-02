@@ -1,0 +1,44 @@
+<html>
+
+<head>
+	<title>Dean Home</title>
+	<link rel="stylesheet" type="text/css" href="home.css">
+</head>
+
+<body>
+
+	<div id= "logout">
+		<form action="/logout/" method="GET">
+			<input type="submit" value="Log Out">
+		</form>
+	</div>
+
+	<div id = "head1">
+		<h1 style="text-align:center">{{.Name}} - Home</h1>
+	</div>
+
+	<div id = "nav">
+		<div>
+			<form action="/profile/" method="GET">
+				<input type="submit" value="Profile">
+			</form>
+		</div>
+	</div>
+	
+	<div id = "fetch_emailid">
+		<div>
+			<form action="/privileges/" method="GET">
+				Enter email id of account to change privelege level of: 
+				<input type="text" NAME="email">
+				
+				<input type="submit" value="Submit">
+			</form>
+		</div>
+	</div>
+
+
+
+
+</body>
+
+</html>

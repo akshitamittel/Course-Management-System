@@ -1,0 +1,52 @@
+<html>
+
+<head>
+	<title>Assignment Grading</title>
+</head>
+
+<body>
+
+	<div id= "options">
+		<form action="/logout/" method="GET">
+			<input type="submit" value="Log Out">
+		</form>
+	</div>
+
+	<div id = "nav">
+		<div>
+			<form action="/profile/" method="GET">
+				<input type="submit" value="Profile">
+			</form>
+		</div>
+	</div>
+
+	<hr>
+
+	<h2>Question:</h2>
+
+	{{.Title}}
+
+	<hr>
+
+	Submission for student {{.AccID}}<br>
+	Submitted <b>{{.LateDays}}</b> days late (after accounting for grace days used)<br>
+
+	<h2>Answer:</h2>
+
+	{{.Answer}}
+
+	<hr>
+
+	<h2>Enter Marks:</h2>
+
+	<form action="/grade-submit/" method="POST">
+	<input type="hidden" name="assnID" value="{{.AssnID}}">
+	<input type="hidden" name="accID" value="{{.AccID}}">
+	Given Marks:<br>
+	<input type="text" name="given" required>out of {{.MaxMarks}}<br>
+	<input type="submit" value="Submit">
+	</form>
+
+</body>
+
+</html>

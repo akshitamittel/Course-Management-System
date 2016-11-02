@@ -1,0 +1,148 @@
+<html>
+<head>
+	<title>Assignment Page</title>
+	<link rel="stylesheet" href="/css/home.css">
+</head>
+
+<body>
+
+	<div id= "options">
+		<form action="/logout/" method="GET">
+			<input type="submit" value="Log Out">
+		</form>
+		<form action="/home/" method="GET">
+			<input type="submit" value="Home">
+		</form>
+
+	</div>
+
+
+
+	<hr>
+	<div id = "head1">
+		<h1 style="text-align:center">{{.CourseCode}}: {{.AssnName}}</h1>
+	</div>
+	<hr>
+
+
+	<div id = "nav">
+	</div>
+
+	<div id = "section">
+		<script>
+			var instr = JSON.parse({{.Instructors}});
+			document.write("<h3>Instructors:</h3>");
+			var i;
+			for(i=0; i < instr["teachers"].length; i++){
+				if(i != 0){
+					document.write(", ");
+				}
+				document.write(instr["teachers"][i]);
+			}
+			document.write("<br>");
+		</script>
+	</div>
+
+	<hr>
+
+	<div>
+		<script>
+			var role = {{.Role}};
+			
+			var i;
+			if(role == 1||role == 2){
+				document.write("<ul>");
+				var type;
+				if({{.Duetime}} != ""){
+					type = "Assignment: ";
+				} else {
+					type = "Announcement: ";
+				}
+				document.write("<li><h4>"+type+" <a href=\"/assn/"+{{.AssnID}}+"\">"+{{.AssnName}}+"</a></h4> ");
+				if({{.Duetime}} != ""){
+					document.write("Completed: "+{{.Total}});
+				}
+				document.write("</li>");
+				document.write("</ul");
+			}else{
+
+				document.write("<ul>");	
+				var type;
+				if({{.Duetime}} != ""){
+					type = "Assignment: ";
+				} else {
+					type = "Announcement: ";
+				}
+				document.write("<li><h4>"+type+" <a href=\"/assn/"+{{.AssnID}}+"\">"+{{.AssnName}}+"</a></h4> ");
+				if({{.Done}} != "none"){
+					document.write("<b>"+{{.Done}}+"</b>");
+					if({{.Done}} != "Done"){
+						var dat = {{.Duetime}}.replace(" ","T");
+						dat = new Date(dat);
+						var now = new Date();
+
+						if(now<dat){
+							document.write(": Due ");
+							document.write(dat);
+						} else {
+							document.write(": LATE!");
+							var maxDat = {{.Maxsubmittime}}.replace(" ","T");
+							maxDat = new Date(maxDat);
+							if({{.Maxsubmittime}} != "" && maxDat < now){
+								document.write(" Maximum Submission Date ");
+								document.write(maxDat);
+							}
+						}
+					}
+					
+					document.write("</li>");
+				}
+				document.write("</ul>");
+			}
+
+		</script>
+	</div>
+	<hr>
+
+	<hr>
+	<div>
+	<script>
+		var rol = {{.Role}};
+		if(rol != 1){
+			document.write("<h4>Enter the answer here:</h4><form name=\"answerform\" action=\"/answer-submit/\" onsubmit=\"return checkForm()\" method=\"POST\"><br><input type=\"text\" name=\"answer\" ><br><input type=\"hidden\" name=\"asn_id\" value={{.AssnID}}></form></div><hr><hr>");
+		}else{
+			document.write("");
+		}
+	</script>
+	<div>
+		<script>
+			
+			var comments = JSON.parse({{.Comments}});
+			var i;
+			document.write("<h4>Class Comments:</h4>");
+			document.write("<ul>");
+			for(i=0; i<comments.length; i++){
+				
+				document.write("<li><h4>"+comments[i]["cid"]+" : "+comments[i]["cstring"]+"  "+comments[i]["ctime"]+"</a></h4> ");
+				document.write("</li>");	
+			}
+			document.write("</ul>");
+
+		</script>
+	</div>
+	<hr>	
+
+	<hr>
+	<div>
+	<h4>Enter a comment here:</h4>
+	<form name="commentform" action="/comment-submit/" onsubmit="return checkForm()" method="POST">
+		<br>
+		<input type="text" name="comment" ><br>
+		<input type="hidden" name="asn_id" value={{.AssnID}}>
+	</form>
+	</div>
+	<hr>
+	
+	
+</body>
+</html>

@@ -1,0 +1,40 @@
+<html>
+
+<head>
+	<title>Class Page</title>
+	<link rel="stylesheet" href="/css/home.css">
+</head>
+
+<body>
+
+	<div id= "options">
+		<form action="/logout/" method="GET">
+			<input type="submit" value="Log Out">
+		</form>
+		<form action="/home/" method="GET">
+			<input type="submit" value="Home">
+		</form>
+
+	</div>
+
+	<div id = "head1">
+		<h1 style="text-align:center">{{.CourseCode}}: {{.CourseName}} - Class Page</h1>
+	</div>
+
+	<hr>
+	<div id="section">
+		<script>
+			var courses = JSON.parse({{.AllAcc}});
+			document.write("<table style=\"width:100%\">");
+			document.write("<tr><th>Roll no.</th><th>Name</th><th>Email</th></tr>");
+			var i;
+			for(i = 0; i<courses.length; i++){
+				document.write("<tr><td>"+courses[i]["Rollno"]+"</td><td>"+courses[i]["Name"]+"</td><td>"+courses[i]["Email"]+"</td></tr>");
+			}
+			document.write("</table>");
+		</script>
+	</div>
+	
+</body>
+
+</html>

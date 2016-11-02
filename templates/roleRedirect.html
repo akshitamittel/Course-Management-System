@@ -1,0 +1,57 @@
+<html>
+
+<head>
+	<title>Roles Page</title>
+	<link rel="stylesheet" href="/css/home.css">
+</head>
+
+<body>
+
+	<div id= "options">
+		<form action="/logout/" method="GET">
+			<input type="submit" value="Log Out">
+		</form>
+		<form action="/home/" method="GET">
+			<input type="submit" value="Home">
+		</form>
+
+	</div>
+
+	<div id = "head1">
+		<h1 style="text-align:center"> Roles Confirmation</h1>
+	</div>
+
+	<hr>
+	<div id="section">
+		<script>
+			function role(x) {
+				if(x == 1){
+					return " Teacher ";
+				}
+				if(x == 2){
+					return " Teaching assistant ";
+				}
+				if(x == 3){
+					return " Student ";
+				}
+			}
+			var choice = {{.MessageID}};
+			if(choice == -1){
+				document.write("The given email is invalid!<br>");
+			}
+			else if(choice==0){
+				document.write("The role has been updated successfully!<br>");
+			}
+			else if(choice == 1)
+			{
+				var m = JSON.parse({{.Message}});
+				document.write("The role for "+m["Name"] +" has been updated from"+role(m["RoleOld"])+"to"+role(m["RoleNew"])+"<br>");
+
+			}
+			document.write();
+		</script>
+	</div>
+	
+</body>
+
+</html>

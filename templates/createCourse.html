@@ -1,0 +1,48 @@
+<html>
+
+<head>
+
+<title>Course Creation</title>
+
+
+</head>
+
+<body>
+
+<div id= "options">
+		<form action="/logout/" method="GET">
+			<input type="submit" value="Log Out">
+		</form>
+		<script>
+			if({{.PL}} == 2){ 
+				document.write("<form action=\"/deanhome/\" method=\"GET\"><input type=\"submit\" value=\"Home\"></form>");
+			} else { 
+				document.write("<form action=\"/home/\" method=\"GET\"><input type=\"submit\" value=\"Home\"></form>");
+			}
+		</script>
+	</div>
+
+<h1 style="text-align:center">Course Creation</h1>
+
+<hr>
+{{.CreationComp}}
+
+<h3>Enter the course details</h3>
+
+<form name="courseform" action="/course-submit/" onsubmit="return checkForm()" method="POST">
+	Course Name<br>
+	<input type="text" name="courseName" required><br>
+	Course Code<br>
+	<input type="text" name="courseCode" required><br>
+	Start Date(yyyy/mm/dd)<br>
+	<input type="date" name="startDate" required><br>
+	End Date(yyyy/mm/dd)<br>
+	<input type="date" name="endDate" required><br>
+	Maximum Grace Days<br>
+	<input type="number" name="maxGraceDays" required><br>
+	<input type="submit" value="Create Course">
+</form>
+
+</body>
+
+</html>

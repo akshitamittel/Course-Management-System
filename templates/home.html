@@ -1,0 +1,52 @@
+<html>
+
+<head>
+	<title>Home</title>
+	<link rel="stylesheet" type="text/css" href="home.css">
+</head>
+
+<body>
+
+	<div id= "options">
+		<form action="/logout/" method="GET">
+			<input type="submit" value="Log Out">
+		</form>
+	</div>
+
+	<div id = "nav">
+		<div>
+			<form action="/profile/" method="GET">
+				<input type="submit" value="Profile">
+			</form>
+		</div>
+	</div>
+
+	<div id = "head1">
+		<h1 style="text-align:center">{{.Name}} - Home</h1>
+	</div>
+	<hr>
+
+	
+	<div id="section">
+		<script>
+			var courses = JSON.parse({{.Courses}});
+			var i;
+			for( i = 0; i < courses.length; i++){
+				document.write("<h3><a href=\"/course/"+courses[i]["courseID"]+"\">"+courses[i]["courseCode"]+"</a>"+": "+courses[i]["courseName"]+"</h3>");
+				document.write("");
+				if(courses[i]["assignments"] != null){
+					document.write("<ul>");
+					var j;
+					for( j = 0 ; j < courses[i]["assignments"].length; j++){
+						document.write("<li>"+courses[i]["assignments"][j]+"</li>");
+					}
+					document.write("</ul>");
+				}
+				document.write("<hr>");
+			}
+		</script>
+	</div>
+
+</body>
+
+</html>
